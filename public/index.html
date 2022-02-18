@@ -6,12 +6,25 @@
 	<style type='text/css'>
 		* { box-sizing: border-box; }
 		body { padding: 20px; font-family:courier,arial,helvetica; }
+		pre{
+			border-radius: 10px;
+			background: #eeeeee;
+			padding: 20px;
+		}
 	</style>
 </head>
 <body>
 	<div>
         <h1>Errand mailer</h1>
         <p>Send email</p>
+		<pre>
+			{
+				from: 'ibcommercialtech2@gmail.com',
+				to: 'femi@e-limu.org',
+				subject: 'Trophy Extra Special',
+				html: 'One-time Password<p>204027</p>'
+			}
+		</pre>
 	</div>
 </body>
 </html>
