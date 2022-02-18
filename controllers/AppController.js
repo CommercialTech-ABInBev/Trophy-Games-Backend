@@ -3,8 +3,8 @@ const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'ibcommercialtech2@gmail.com',
-    pass: 'VirtualReality2'
+    user: 'femi@e-limu.org',
+    pass: '26845(limu);'
   }
 });
 
@@ -13,12 +13,7 @@ exports.sendMail = (req, res) => {
   // if(!requestModel)
   //   res.status(400).send({message: "Invalid parameters!"});
 
-  const mailOptions = {
-    from: 'ibcommercialtech2@gmail.com',
-    to: 'femidotayodeji@gmail.com',
-    subject: 'Cancup OTP',
-    html: '<h1>One-time Password</h1><p>123456</p>'
-  };
+  const mailOptions = requestModel;
   
   transporter.sendMail(mailOptions, function(error, info){
     if (error) {
