@@ -10,18 +10,28 @@ const transporter = nodemailer.createTransport({
 
 exports.sendMail = (req, res) => {
   const requestModel = req.body;
-  // if(!requestModel)
-  //   res.status(400).send({message: "Invalid parameters!"});
+  if(!requestModel)
+    return res.status(400).send({message: "Invalid request!"});
 
+  if(!requestModel.from)
+    return res.status(400).send({message: "Email from is required!"});
+
+  if(!requestModel.to)
+    return res.status(400).send({message: "Email to is required!"});
+
+  if(!requestModel.subject)
+    return res.status(400).send({message: "Email subject is required!"});
+
+  if(!requestModel.html && !requestModel.text)
+    return res.status(400).send({message: "Email Content (html or text) is required"});
+  
   const mailOptions = requestModel;
   
   transporter.sendMail(mailOptions, function(error, info){
     if (error) {
-      console.log(error);
-      res.status(500).send({message: "Error sending email", error});
+      return res.status(500).send({message: "Error sending email", error});
     } else {
-      console.log(info);
-      res.status(200).send({message: "Email sent", data: info});
+      return res.status(200).send({message: "Email sent", data: info});
     }
   });
     
