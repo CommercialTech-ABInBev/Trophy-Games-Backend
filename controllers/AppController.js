@@ -1,5 +1,6 @@
 const nodemailer = require('nodemailer');
 
+const authkey = "9iU3zyX8IA6UtJxiGDOfgoq0Mcngz1Gir0JnenUfQxZ6AscuTpu0BvRRfuew5H8MXEvAiKAkDCh8mcLbV9sAbsik3fIahjGYzV4u";
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -9,6 +10,10 @@ const transporter = nodemailer.createTransport({
 });
 
 exports.sendMail = (req, res) => {
+  const requestAuthKey = req.headers["api-auth-key"];
+  if(authkey !== requestAuthKey)
+    return res.status(403).send({message: "Access Forbidden", error: "Unauthorize access"});
+
   const requestModel = req.body;
   if(!requestModel)
     return res.status(400).send({message: "Invalid request!"});
@@ -24,9 +29,9 @@ exports.sendMail = (req, res) => {
 
   if(!requestModel.html && !requestModel.text)
     return res.status(400).send({message: "Email Content (html or text) is required"});
-  
+
   const mailOptions = requestModel;
-  
+
   transporter.sendMail(mailOptions, function(error, info){
     if (error) {
       return res.status(500).send({message: "Error sending email", error});
