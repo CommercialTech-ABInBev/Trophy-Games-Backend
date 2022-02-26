@@ -1,7 +1,7 @@
 {
-  "name": "errand-emailer",
+  "name": "ee",
   "version": "1.0.0",
-  "description": "send email",
+  "description": "Send email with a simple api request, Ee takes care of the rest logic.",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
