@@ -41,3 +41,11 @@ exports.sendMail = (req, res) => {
   });
     
 };
+
+exports.getDate = (req, res) => {
+  const requestAuthKey = req.headers["api-auth-key"];
+  if(authkey !== requestAuthKey)
+    return res.status(403).send({message: "Access Forbidden", error: "Unauthorize access"});
+
+  return res.status(200).send({message: "Today date", data: new Date()});
+};

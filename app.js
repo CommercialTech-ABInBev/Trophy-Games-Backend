@@ -31,4 +31,8 @@ app
   .route("/api/send-mail")
   .post(appController.sendMail);
 
+app
+  .route("/api/today")
+  .get(appController.getDate);
+
 console.log("connected and listening at http://localhost:%s", port); 
