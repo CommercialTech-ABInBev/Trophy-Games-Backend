@@ -47,5 +47,20 @@ exports.getDate = (req, res) => {
   if(authkey !== requestAuthKey)
     return res.status(403).send({message: "Access Forbidden", error: "Unauthorize access"});
 
-  return res.status(200).send({message: "Today date", data: new Date()});
+  return res.status(200).send({message: "Today date", data: formatDate(new Date())});
 };
+
+function formatDate(d = new Date()){
+  return (
+      [
+          (d.getMonth()+1).toString().padStart(2,"0"),
+          d.getDate().toString().padStart(2,"0"),
+          d.getFullYear().toString().padStart(4,"0")
+      ].join('-') +' ' +
+      [
+          d.getHours().toString().padStart(2,"0"),
+          d.getMinutes().toString().padStart(2,"0"),
+          d.getSeconds().toString().padStart(2,"0")
+      ].join(':')
+  );
+}
